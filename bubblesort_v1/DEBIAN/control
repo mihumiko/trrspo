@@ -1,0 +1,8 @@
+Package: trrspo
+Version: 1.0-1
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: mihumiko <gavrm04@mail.ru>
+Depends: libc6 (>= 2.27), libgcc-s1 (>= 3.0), libstdc++6 (>= 5.2)
+Description: Bubble sort implementation for integer arrays
