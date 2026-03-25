@@ -61,6 +61,7 @@ void testDuplicates() {
     assert(arr[2] == 2);
     assert(arr[3] == 3);
     assert(arr[4] == 3);
+    assert(arr[5] == 1);
     cout << "testDuplicates passed" << endl;
 }
 
