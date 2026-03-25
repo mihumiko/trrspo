@@ -1,7 +1,6 @@
 #!/bin/bash
-set -e  # Exit on error
+set -e
 
-# Navigate to script directory
 cd "$(dirname "$0")"
 make
 ./run-tests
