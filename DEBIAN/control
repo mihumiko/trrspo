@@ -4,5 +4,5 @@ Section: utils
 Priority: optional
 Architecture: amd64
 Maintainer: mihumiko <gavrm04@mail.ru>
-Depends: libc6 (>= 2.27), libgcc-s1 (>= 3.0), libstdc++6 (>= 5.2)
+Depends: libc6
 Description: Bubble sort implementation for integer arrays
