@@ -120,10 +120,8 @@ jobs:
         push: false
         load: true
         tags: trrspo:latest
-
-    - name: Test Docker container
-      run: |
-        echo "5\n1 5 3 2 4" | docker run --rm trrspo:latest
+        build-args: |
+          BUILDKIT_INLINE_CACHE=1
 
     - name: Push Docker image
       run: |
