@@ -112,12 +112,20 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push Docker image
+    - name: Build Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         file: cicd/Dockerfile
-        push: true
-        tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/trrspo:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/trrspo:${{ github.sha }}
+        push: false
+        load: true
+        tags: trrspo:latest
+
+    - name: Test Docker container
+      run: |
+        echo "5\n1 5 3 2 4" | docker run --rm trrspo:latest
+
+    - name: Push Docker image
+      run: |
+        docker tag trrspo:latest ${{ secrets.DOCKERHUB_USERNAME }}/trrspo:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/trrspo:latest
