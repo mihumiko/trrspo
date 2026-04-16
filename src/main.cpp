@@ -1,66 +1,43 @@
 #include <iostream>
-#include <limits>
+#include <vector>
 #include <stdexcept>
 #include "sort.hpp"
 
 using namespace std;
 
-int* readArray(size_t& size) {
-    cout << "Enter array size: ";
-    while (!(cin >> size) || size <= 0) {
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-        cout << "Invalid size. Enter a positive integer: ";
-    }
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    
-    int* arr = new int[size];
-    cout << "Enter " << size << " integers: ";
-    for (size_t i = 0; i < size; ++i) {
-        while (!(cin >> arr[i])) {
-            if (cin.fail()) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            cout << "Invalid value. Enter integer #" << (i + 1) << ": ";
-        }
-    }
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    
-    return arr;
-}
-
-void printArray(const int* arr, size_t size) {
+void printArray(const vector<int>& arr) {
     cout << "[";
-    for (size_t i = 0; i < size; ++i) {
+    for (size_t i = 0; i < arr.size(); ++i) {
         cout << arr[i];
-        if (i < size - 1) {
-            cout << ", ";
-        }
+        if (i < arr.size() - 1) cout << ", ";
     }
     cout << "]" << endl;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     try {
-        size_t size;
-        int* arr = readArray(size);
-        
+        if (argc < 2) {
+            cerr << "Usage: " << argv[0] << " num1 num2 num3 ..." << endl;
+            return 1;
+        }
+
+        vector<int> arr;
+        for (int i = 1; i < argc; i++) {
+            arr.push_back(stoi(argv[i]));
+        }
+
         cout << "Original array: ";
-        printArray(arr, size);
-        
-        bubbleSort(arr, size);
-        
+        printArray(arr);
+
+        bubbleSort(arr.data(), arr.size());
+
         cout << "Sorted array: ";
-        printArray(arr, size);
-        
-        delete[] arr;
+        printArray(arr);
+
     } catch (const exception& e) {
         cerr << "Error: " << e.what() << endl;
         return 1;
     }
-    
+
     return 0;
 }
